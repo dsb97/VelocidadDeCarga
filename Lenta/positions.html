@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoT - Trading</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/css/dataTables.bootstrap4.min.css"
+        rel="stylesheet">
+    <link rel="stylesheet" href="Styles/styles.css">
+
+</head>
+
+<body>
+
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="home.html">CryptoT</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="w-100"></div>
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+                <a class="nav-link px-3" href="#">Mi perfil</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div  class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse pe-1 ps-1">    
+            </div>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+                <h2 class="pt-3">Posiciones</h2>
+                <h6 class="pb-3 border-bottom">Visualiza las transacciones llevadas a cabo</h6>
+                <section class="pt-3 pb-2 mb-3">
+                    <h4>Abiertas</h4>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm" id="tablaAbierta">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">P&amp;L</th>
+                                    <th scope="col">Fecha de ejecución</th>
+                                    <th scope="col"><span aria-label="Cerrar operación" hidden>Cerrar operación</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="pt-3 pb-2 mb-3">
+                    <h4>Cerradas</h4>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm" id="tablaCerradas">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Fecha de cierre</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+
+
+                <div class="modal fade" id="exampleModal" tabindex="-1"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content rounded-6 shadow">
+                            <div class="modal-header border-bottom-0">
+                                <h5 class="modal-title"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body py-0">
+                                <p id="texto"></p>
+                                <span class="required text-danger" > Campo requerido </span>
+                                <form>
+                                    <div class="row mb-3 mt-3">
+                                        <label for="cantidad" class="col-sm-2 col-form-label required">Cantidad</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" readonly aria-label="Cantidad"
+                                                    id="cantidad" aria-describedby="addonCantidad">
+                                                <span class="input-group-text" id="addonCantidad"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="precio" class="col-sm-2 col-form-label required">Precio</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" readonly aria-label="Precio"
+                                                    id="precio" aria-describedby="addonPrecio">
+                                                <span class="input-group-text" id="addonPrecio"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="pyl" class="col-sm-2 col-form-label required">P&L actual</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" readonly aria-label="Profit and looses"
+                                                    id="pyl" aria-describedby="addonPyl">
+                                                <span class="input-group-text" id="addonPyl"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="row dropdown-divider">
+                                    <div class="row mb-3">
+                                        <label for="total" class="col-sm-2 col-form-label required">Total</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" readonly aria-label="Total operación"
+                                                    id="total" aria-describedby="addonTotal">
+                                                <span class="input-group-text" id="addonTotal"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-10 offset-sm-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                <label class="form-check-label" for="gridCheck1">
+                                                    Cerrar posición parcialmente
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn" data-bs-dismiss="modal" id="liveToastBtn">
+                                    <span aria-hidden="true" hidden>x</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="position-fixed top-0 end-0 p-3" style="z-index: 99999">
+                    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header">
+                            <img src="./Icons/transaction-list.png " class="rounded me-2 icono-menu" alt="">
+                            <strong class="me-auto">Posiciones</strong>
+                            <small>Ahora</small>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            Operación realizada con éxito. Consulte el listado de operaciones cerradas para ver el
+                            detalle de la transacción.
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+
+
+        </div>
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse pe-1 ps-1">
+                <div class="position-sticky pt-3">
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Opera con criptomonedas y visualiza la cotización más actual">
+                            <a class="nav-link" aria-current="page" href="trading.html">
+                                <img src="./Icons/stocks.png" class="icono-menu" alt="">
+                                Trading
+                            </a>
+                        </li>
+                        <li class="separator"></li>
+                        <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Accede al histórico de tus operaciones">
+                            <a class="nav-link active" href="positions.html">
+                                <img src="./Icons/transaction-list.png" class="icono-menu" alt="">
+                                Posiciones
+                            </a>
+                        </li>
+                        <li class="separator"></li>
+                        <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Visualiza tu cartera y extrae el dinero a tu cuenta de ahorros">
+                            <a class="nav-link" href="wallet.html" >
+                                <img src="./Icons/banknotes.png" class="icono-menu" alt="">
+                                Cartera
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
+                <div class="container">
+                    <footer class="py-3 my-4">
+                  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Inicio</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+                    <li class="nav-item"><a href="home.html#contacto" class="nav-link px-2 text-muted">Contacto</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Sobre nosotros</a></li>
+                  </ul>
+                  <p class="text-center text-muted">© 2022 CryptoT, Inc</p>
+                </footer>
+              </div>
+                </div>
+                
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="JS/autocomplete.js"></script>
+    <script src="JS/positions.js"></script>
+    <script src="JS/dashboard.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tablaAbierta').DataTable({
+                "bFilter": false,
+                "language": {
+                    "lengthMenu": "_MENU_ registros",
+                    "zeroRecords": "Sin registros - sorry",
+                    "info": "_PAGE_ de _PAGES_",
+                    "infoFiltered": "(filtered from _MAX_ total records)"
+                },
+                "pagingType": "numbers",
+                "columns": [
+                    { "type": "string" },
+                    { "type": "num" },
+                    { "type": "num" },
+                    { "type": "date" },
+                    { "type": "string" },
+                ]
+            });
+            $('#tablaCerradas').DataTable({
+                "bFilter": false,
+                "language": {
+                    "lengthMenu": "_MENU_ registros",
+                    "zeroRecords": "Sin registros disponibles",
+                    "info": "_PAGE_ de _PAGES_",
+                    "infoFiltered": "(filtered from _MAX_ total records)"
+                },
+                "pagingType": "numbers"
+            });
+        });
+    </script>
+
+</body>
+
+</html>
