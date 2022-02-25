@@ -1,3 +1,8 @@
+.cryptoIcon {
+  height: 1.8rem;
+  width: 1.8rem;
+  margin: auto;
+}
 .btn-success {
   color: #fff;
   background-color: #115F3B;
@@ -58,7 +63,7 @@
 }
 
 .crypto {
-  background-image: url('../Icons/Crypto.jpg');
+  background-image: url('../Icons/Crypto.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;

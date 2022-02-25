@@ -23,7 +23,7 @@ var vecDatos = [
         "value": "DSH"
     },
     {
-        "label": "DogeCoin ",
+        "label": "DogeCoin",
         "value": "DOGE"
     },
     {
@@ -88,7 +88,7 @@ function addDataToTableAbierta(etiqueta, value) {
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
         row.id = idd;
-        cell1.innerHTML = `${etiqueta} (${value})`;
+        cell1.innerHTML = `<img class="cryptoIcon" src="./Icons/${etiqueta.toLowerCase().replaceAll(' ', '_')}.png" alt="${etiqueta}"></img> ${etiqueta} (${value})`;
         let cant = `${random(100, 1000)},${random(1, 99)}`;
         cell2.innerHTML = cant;
         let curr = (random(0, 1) == 1 ? value : 'EUR');

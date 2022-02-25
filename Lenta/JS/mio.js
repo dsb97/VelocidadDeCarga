@@ -4,22 +4,6 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 })
 
 
-$(function () {
-    // Configurar datetimepicker
-    $('#startTimePicker').datetimepicker({
-        format: 'DD/MM/YYYY',
-        locale: moment.locale('es-es'),
-    });
-});
-
-$(function () {
-    // Configurar datetimepicker
-    $('#startTimePicker2').datetimepicker({
-        format: 'DD/MM/YYYY',
-        locale: moment.locale('es-es'),
-    });
-});
-
 var toastTrigger = document.getElementById('liveToastBtn');
 var toastLiveExample = document.getElementById('liveToast');
 if (toastTrigger) {
@@ -50,7 +34,7 @@ var vecDatos = [
         "value": "DSH"
     },
     {
-        "label": "DogeCoin ",
+        "label": "DogeCoin",
         "value": "DOGE"
     },
     {
@@ -75,6 +59,7 @@ var vecDatos = [
     },
 
 ];
+
 const field = document.getElementById('input');
 const ac = new Autocomplete(field, {
     data: vecDatos,
@@ -91,8 +76,29 @@ var datosTabla = [{
     "label": null,
     "value": null
 }];
-let pA = vecDatos[random(0, vecDatos.length - 1)];
-addDataToTable(pA.label, pA.value);
+
+function elegirN () {
+    let num = Math.floor(Math.random() * 10);
+    if(!el.includes(num)) {
+        el.push(num);
+        return num;
+    } else {
+        elegirN();
+    }
+}
+
+let el = [];
+
+for (let l = 0; l < 10; l++) {
+    elegirN();
+}
+
+
+for (let i = 0; i < 10; i++) {
+    let pA = vecDatos[el[i]];
+    addDataToTable(pA.label, pA.value);
+}
+
 
 
 
@@ -112,8 +118,7 @@ function addDataToTable(etiqueta, value) {
         var cell5 = row.insertCell(4);
         var cell6 = row.insertCell(5);
         row.id = value;
-
-        cell1.innerHTML = `${etiqueta} (${value})`;
+        cell1.innerHTML = `<img class="cryptoIcon" src="./Icons/${etiqueta.toLowerCase().replaceAll(' ', '_')}.png" alt="${etiqueta}"></img> ${etiqueta} (${value})`;
         cell2.innerHTML = `${random(100, 10000)},${random(1, 99)}`;
         let dif = random(-1000, 1000);
         let porc = random(0, 100) * (dif < 0 ? -1 : 1);

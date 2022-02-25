@@ -4,22 +4,6 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 })
 
 
-$(function () {
-    // Configurar datetimepicker
-    $('#startTimePicker').datetimepicker({
-        format: 'DD/MM/YYYY',
-        locale: moment.locale('es-es'),
-    });
-});
-
-$(function () {
-    // Configurar datetimepicker
-    $('#startTimePicker2').datetimepicker({
-        format: 'DD/MM/YYYY',
-        locale: moment.locale('es-es'),
-    });
-});
-
 var toastTrigger = document.getElementById('liveToastBtn');
 var toastLiveExample = document.getElementById('liveToast');
 if (toastTrigger) {
